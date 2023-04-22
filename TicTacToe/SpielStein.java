@@ -1,18 +1,16 @@
-package TicTacToe;
-
 public class SpielStein{
-    private boolean isCross;
+    private String Zeichen;
     private int positionX;
     private int positionY;
 
-    public SpielStein(boolean isCross, int x, int y){
-        this.isCross = isCross;
+    public SpielStein(String zeichen, int x, int y){
+        this.Zeichen = zeichen;
         this.positionX = x;
         this.positionY = y;
     }
 
-    public boolean getisCross(){
-        return this.isCross;
+    public String getZeichen(){
+        return this.Zeichen;
     }
 
     public int getPositionX(){

@@ -1,21 +1,18 @@
-package TicTacToe;
-
 public class Spielfeld {
     private String[][] spielfeld;
     private SpielStein spielStein;
-
-    public Spielfeld(SpielStein spst){
-        this.spielStein = spst;
+ 
+    public Spielfeld(){
         spielfeld = new String[3][3];
     }
 
     public String[][] updateSpielfeld(String[][] spielfeld){
         int x = spielStein.getPositionX();
         int y = spielStein.getPositionY();
-        if(spielStein.getisCross() == true){
+        if(spielStein.getZeichen() == "X"){
             spielfeld[y][x] = "X";
         }
-        if(spielStein.getisCross() == false){
+        if(spielStein.getZeichen() == "O"){
             spielfeld[y][x] = "O";
         }
 
@@ -47,6 +44,14 @@ public class Spielfeld {
 
 
     public void printSpielFeld(){
-
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                if(j == 2){
+                    System.out.println(spielfeld[i][j]);
+                }else{
+                    System.out.print(spielfeld[i][j]);
+                } 
+            }
+        }
     }
 }
