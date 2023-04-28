@@ -2,9 +2,8 @@ public class RemoveCMD implements ICommand{
     private Wort w;
     private String addBuchstabe;
 
-    public RemoveCMD(Wort w, String addBuchstabe){
+    public RemoveCMD(Wort w){
         this.w = w;
-        this.addBuchstabe = addBuchstabe;
     }
     
     @Override

@@ -1,0 +1,68 @@
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.util.Observable;
+import java.util.Observer;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
+/**
+ * 
+ * @author s8gre
+ *
+ */
+@SuppressWarnings("serial")
+public class SVView extends JPanel implements Observer {
+
+	private final int CELL_SIZE = 40;
+	private final int PIXEL_WIDTH = CELL_SIZE * SVModel.BOARD_WIDTH;
+	private final int PIXEL_HEIGHT = CELL_SIZE * SVModel.BOARD_HEIGHT;
+
+	
+	public SVView(SVModel model, SVController controller) {
+		model.addObserver(this);
+		setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.BLACK));
+		setPreferredSize(new Dimension(PIXEL_WIDTH, PIXEL_HEIGHT));
+		setMaximumSize(new Dimension(PIXEL_WIDTH, PIXEL_HEIGHT));
+		setBackground(Color.RED);
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setBorder(BorderFactory.createLineBorder(Color.BLUE));
+		addKeyListener(controller); 
+	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		setFocusable(true); 
+		requestFocusInWindow();
+		SVObject msg = (SVObject) arg; 
+		
+		switch(msg.getAction()) {
+
+		case GAMEOVER: 
+			System.exit(0);
+		
+		case REDRAW: 
+			Graphics g = this.getGraphics();
+			g.clearRect(0, 0, getWidth(), getHeight());
+
+			g.setColor(Color.blue);
+			g.drawRect(CELL_SIZE * msg.getCursor().getX(), CELL_SIZE * msg.getCursor().getY(), CELL_SIZE, CELL_SIZE);
+
+			for(Ship s : msg.getShips()) {
+				for(Position pos : s.getPositions()) {
+					g.setColor(Color.red);
+					g.fillRect(CELL_SIZE * pos.getX(), CELL_SIZE * pos.getY(), CELL_SIZE, CELL_SIZE);
+					g.setColor(Color.black);
+					g.drawRect(CELL_SIZE * pos.getX(), CELL_SIZE * pos.getY(), CELL_SIZE, CELL_SIZE);
+				}
+			}
+			break; 
+		}
+		
+	}
+
+
+}

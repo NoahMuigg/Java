@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class main {
     public static void main(String[] args){
         boolean los = true;
-        Spielfeld spielfeld = new Spielfeld();
+        Spielfeld spielfeld = Spielfeld.instance();
 
         while(los == true){
             Scanner scanner = new Scanner(System.in);

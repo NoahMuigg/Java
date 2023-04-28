@@ -1,9 +1,17 @@
 public class Spielfeld {
     private String[][] spielfeld;
     private SpielStein spielStein;
- 
-    public Spielfeld(){
+    private static Spielfeld instance = null;
+
+    private Spielfeld(){
         spielfeld = new String[3][3];
+    }
+
+    public static Spielfeld instance(){
+        if(instance == null){
+            instance = new Spielfeld();
+        }
+        return instance;
     }
 
     public String[][] updateSpielfeld(String[][] spielfeld){
